@@ -16,8 +16,8 @@ var ActionMenuButton = React.createClass({
   render: function () {
     return (
       <div className="rs-dropdown">
-        <ActionButton title={this.state.title} showMenu={this.showMenu}/>
-        <ActionMenu visible={this.state.visible} hideMenu={this.hideMenu}/>
+        <ActionButton title={this.state.title} showMenu={this.showMenu} />
+        <ActionMenu visible={this.state.visible} hideMenu={this.hideMenu} />
       </div>
     )
   }
@@ -45,10 +45,50 @@ var ActionMenu = React.createClass({
 
     return (
       <ul className={"rs-dropdown-menu " + visible}>
-        <li className="rs-dropdown-item"><span className="rs-dropdown-category" id="first">Identify</span></li>
-        <li className="rs-dropdown-item"><a className="rs-dropdown-link" href="#">Rename Server...</a></li>
-        <li className="rs-dropdown-item"><a className="rs-dropdown-link" href="#">Tag Server...</a></li>
+        <GlobalRegion title="All Regions (Global)" />
+        <GeographicalRegion title="United States" />
+        <LocalRegion title="Northern Virginia (IAD)" />
+        <LocalRegion title="Chicago (ORD)" />
+        <LocalRegion title="Dallas (DFW)" />
+        <GeographicalRegion title="Europe" />
+        <LocalRegion title="London (LON)" />
+        <GeographicalRegion title="Asia-Pacific" />
+        <LocalRegion title="Sydney (SYD)" />
+        <LocalRegion title="Hong Kong (HKG)" />
       </ul>
+    )
+  }
+});
+
+var GlobalRegion = React.createClass({
+  render: function () {
+    return (
+      <li className="rs-dropdown-item">
+        <span className="region-checkbox"></span>
+        <span className="region global-region">{this.props.title}</span>
+      </li>
+    )
+  }
+});
+
+var GeographicalRegion = React.createClass({
+  render: function () {
+    return (
+      <li className="rs-dropdown-item">
+        <span className="region-checkbox"></span>
+        <span className="region geographical-region">{this.props.title}</span>
+      </li>
+    )
+  }
+});
+
+var LocalRegion = React.createClass({
+  render: function () {
+    return (
+      <li className="rs-dropdown-item">
+        <span className="region-checkbox"></span>
+        <span className="region local-region">{this.props.title}</span>
+      </li>
     )
   }
 });
