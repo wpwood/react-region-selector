@@ -1,24 +1,33 @@
+.rs-dropdown-item {
+  white-space: nowrap;
+}
+
 .region {
-  display: block;
+  display: inline-block;
   margin: 5px 0px 0px 10px;
   padding: 0px 5px;
   color: #333;
-  white-space: nowrap;
   cursor: pointer;
 }
 
 .region-checkbox {
   width: 10px;
   height: 10px;
+  display: inline-block;
+  vertical-align: baseline;
   background-repeat: no-repeat;
 }
 
 .rs-dropdown-item.selected .region-checkbox {
-  color: #f33;
   background-image: url("../img/small_checkmark.png");
 }
 
+.rs-dropdown-item.selected .region {
+  color: #f33;
+}
+
 .region .region-checkbox {
+  padding-left: 10px;
   margin-right: 15px;
 }
 
