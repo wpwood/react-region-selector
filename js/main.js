@@ -13,11 +13,27 @@ var ActionMenuButton = React.createClass({
   hideMenu: function (e) {
     this.setState({visible: false});
   },
+  selectItem: function (e) {
+    this.setState({title: e.currentTarget.getAttribute('title')});
+
+    console.log(e.currentTarget.getAttribute('value') + " was selected");
+  },
   render: function () {
     return (
       <div className="rs-dropdown">
         <ActionButton title={this.state.title} showMenu={this.showMenu} />
-        <ActionMenu visible={this.state.visible} hideMenu={this.hideMenu} />
+        <ActionMenu visible={this.state.visible} hideMenu={this.hideMenu} select={this.selectItem}>
+          <GlobalRegion title="All Regions (Global)" value="ALL" />
+          <GeographicalRegion title="United States" value="US" />
+          <LocalRegion title="Northern Virginia (IAD)" value="IAD" />
+          <LocalRegion title="Chicago (ORD)" value="ORD" />
+          <LocalRegion title="Dallas (DFW)" value="DFW" />
+          <GeographicalRegion title="Europe" value="EU" />
+          <LocalRegion title="London (LON)" value="LON" />
+          <GeographicalRegion title="Asia-Pacific" value="APAC" />
+          <LocalRegion title="Sydney (SYD)" value="SYD" />
+          <LocalRegion title="Hong Kong (HKG)" value="HKG" />
+        </ActionMenu>
       </div>
     )
   }
@@ -42,20 +58,14 @@ var ActionMenu = React.createClass({
   },
   render: function () {
     var visible = this.props.visible ? 'visible' : 'hidden';
+    var children = React.Children.map(this.props.children, function (child) {
+      return React.addons.cloneWithProps(child, {
+        select: this.props.select}
+      );
+    }, this);
 
     return (
-      <ul className={"rs-dropdown-menu " + visible}>
-        <GlobalRegion title="All Regions (Global)" />
-        <GeographicalRegion title="United States" />
-        <LocalRegion title="Northern Virginia (IAD)" />
-        <LocalRegion title="Chicago (ORD)" />
-        <LocalRegion title="Dallas (DFW)" />
-        <GeographicalRegion title="Europe" />
-        <LocalRegion title="London (LON)" />
-        <GeographicalRegion title="Asia-Pacific" />
-        <LocalRegion title="Sydney (SYD)" />
-        <LocalRegion title="Hong Kong (HKG)" />
-      </ul>
+      <ul className={"rs-dropdown-menu " + visible}>{children}</ul>
     )
   }
 });
@@ -65,7 +75,10 @@ var GlobalRegion = React.createClass({
     return (
       <li className="rs-dropdown-item">
         <span className="region-checkbox"></span>
-        <span className="region global-region">{this.props.title}</span>
+        <span className="region global-region"
+          onClick={this.props.select}
+          value={this.props.value}
+          title={this.props.title}>{this.props.title}</span>
       </li>
     )
   }
@@ -76,7 +89,10 @@ var GeographicalRegion = React.createClass({
     return (
       <li className="rs-dropdown-item">
         <span className="region-checkbox"></span>
-        <span className="region geographical-region">{this.props.title}</span>
+        <span className="region geographical-region"
+          onClick={this.props.select}
+          value={this.props.value}
+          title={this.props.title}>{this.props.title}</span>
       </li>
     )
   }
@@ -87,7 +103,10 @@ var LocalRegion = React.createClass({
     return (
       <li className="rs-dropdown-item">
         <span className="region-checkbox"></span>
-        <span className="region local-region">{this.props.title}</span>
+        <span className="region local-region"
+          onClick={this.props.select}
+          value={this.props.value}
+          title={this.props.title}>{this.props.title}</span>
       </li>
     )
   }
