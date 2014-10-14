@@ -1,0 +1,36 @@
+.region {
+  display: block;
+  margin: 5px 0px 0px 10px;
+  padding: 0px 5px;
+  color: #333;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.region-checkbox {
+  width: 10px;
+  height: 10px;
+  background-repeat: no-repeat;
+}
+
+.rs-dropdown-item.selected .region-checkbox {
+  color: #f33;
+  background-image: url("../img/small_checkmark.png");
+}
+
+.region .region-checkbox {
+  margin-right: 15px;
+}
+
+.global-region {
+  font-weight: bold;
+}
+
+.geographical-region {
+  font-weight: bold;
+  margin: 5px 10px 0px 20px;
+}
+
+.local-region {
+  margin: 5px 10px 0px 30px;
+}
