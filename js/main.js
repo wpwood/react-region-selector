@@ -3,8 +3,9 @@
 var ActionMenuButton = React.createClass({
   getInitialState: function () {
     return {
-      title: 'Region',
-      visible: false
+      title: 'All Regions (Global)',
+      visible: false,
+      selected: 'ALL'
     };
   },
   showMenu: function (e) {
@@ -14,15 +15,16 @@ var ActionMenuButton = React.createClass({
     this.setState({visible: false});
   },
   selectItem: function (e) {
-    this.setState({title: e.currentTarget.getAttribute('title')});
-
-    console.log(e.currentTarget.getAttribute('value') + " was selected");
+    this.setState({
+      title: e.currentTarget.getAttribute('title'),
+      selected: e.currentTarget.getAttribute('value')
+    });
   },
   render: function () {
     return (
       <div className="rs-dropdown">
         <ActionButton title={this.state.title} showMenu={this.showMenu} />
-        <ActionMenu visible={this.state.visible} hideMenu={this.hideMenu} select={this.selectItem}>
+        <ActionMenu visible={this.state.visible} selected={this.state.selected} hideMenu={this.hideMenu} select={this.selectItem}>
           <GlobalRegion title="All Regions (Global)" value="ALL" />
           <GeographicalRegion title="United States" value="US" />
           <LocalRegion title="Northern Virginia (IAD)" value="IAD" />
@@ -60,6 +62,7 @@ var ActionMenu = React.createClass({
     var visible = this.props.visible ? 'visible' : 'hidden';
     var children = React.Children.map(this.props.children, function (child) {
       return React.addons.cloneWithProps(child, {
+        selected: (child.props.value === this.props.selected),
         select: this.props.select}
       );
     }, this);
@@ -72,8 +75,10 @@ var ActionMenu = React.createClass({
 
 var GlobalRegion = React.createClass({
   render: function () {
+    var selectedClass = this.props.selected ? 'selected' : '';
+
     return (
-      <li className="rs-dropdown-item">
+      <li className={"rs-dropdown-item " + selectedClass}>
         <span className="region-checkbox"></span>
         <span className="region global-region"
           onClick={this.props.select}
@@ -86,8 +91,10 @@ var GlobalRegion = React.createClass({
 
 var GeographicalRegion = React.createClass({
   render: function () {
+    var selectedClass = this.props.selected ? 'selected' : '';
+
     return (
-      <li className="rs-dropdown-item">
+      <li className={"rs-dropdown-item " + selectedClass}>
         <span className="region-checkbox"></span>
         <span className="region geographical-region"
           onClick={this.props.select}
@@ -100,8 +107,10 @@ var GeographicalRegion = React.createClass({
 
 var LocalRegion = React.createClass({
   render: function () {
+    var selectedClass = this.props.selected ? 'selected' : '';
+
     return (
-      <li className="rs-dropdown-item">
+      <li className={"rs-dropdown-item " + selectedClass}>
         <span className="region-checkbox"></span>
         <span className="region local-region"
           onClick={this.props.select}

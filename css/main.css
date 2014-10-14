@@ -4,7 +4,6 @@
 
 .region {
   display: inline-block;
-  margin: 5px 0px 0px 10px;
   padding: 0px 5px;
   color: #333;
   cursor: pointer;
@@ -16,30 +15,23 @@
   display: inline-block;
   vertical-align: baseline;
   background-repeat: no-repeat;
+  margin-left: 10px;
 }
 
 .rs-dropdown-item.selected .region-checkbox {
   background-image: url("../img/small_checkmark.png");
 }
 
-.rs-dropdown-item.selected .region {
-  color: #f33;
-}
-
-.region .region-checkbox {
-  padding-left: 10px;
-  margin-right: 15px;
-}
-
 .global-region {
   font-weight: bold;
+  margin: 5px 10px 0px 0px;
 }
 
 .geographical-region {
   font-weight: bold;
-  margin: 5px 10px 0px 20px;
+  margin: 5px 10px 0px 10px;
 }
 
 .local-region {
-  margin: 5px 10px 0px 30px;
+  margin: 5px 10px 0px 20px;
 }
