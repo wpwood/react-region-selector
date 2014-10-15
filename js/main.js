@@ -53,10 +53,10 @@ var ActionButton = React.createClass({
 
 var ActionMenu = React.createClass({
   componentWillUnmount: function (e) {
-    document.body.removeEventListener('click', this.props.hideMenu, false);
+    $('body').off('click');
   },
   componentDidMount: function () {
-    document.body.addEventListener('click', this.props.hideMenu, false);
+    $('body').on('click', this.props.hideMenu);
   },
   render: function () {
     var visible = this.props.visible ? 'visible' : 'hidden';
